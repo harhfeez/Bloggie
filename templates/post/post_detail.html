@@ -47,14 +47,16 @@
         {% endif %}
     </div>
 
-{% if user.is_authenticated %}
-<h3>Leave a comment</h3>
-<form method="post">
-    {% csrf_token %}
-    {{comment_form.as_p}}
-    <button type="submit" class=" btn btn-outline-success">Post Comment</button>
-</form>
+    {% if user.is_authenticated %}
+    <h3>Leave a comment</h3>
+    <div class="comment">
+        <form method="post">
+            {% csrf_token %}
+            {{comment_form.as_p}}
+            <button type="submit" class=" btn btn-outline-success">Post Comment</button>
+        </form>
 
+    </div>
 
 </div>
     
@@ -87,7 +89,42 @@
         right: 10px;
         transform: translateY(-50%);
     }
+
+    .comment form input[type="text"],
+    .comment form textarea {
+    padding: 10px;
+    margin-bottom: 10px;
+    width: 25%;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 16px;
+    }
+
+    .comment form input[type="text"]:focus,
+    .comment form textarea:focus {
+    outline: none;
+    border-color: #0066cc;
+    box-shadow: 0 0 5px #0066cc;
+    }
+
+    .comment form button {
+    padding: 10px 20px;
+    background-color: #0066cc;
+    border: none;
+    border-radius: 4px;
+    color: #fff;
+    font-size: 16px;
+    cursor: pointer;
+    }
+
+    .comment form button:hover {
+    background-color: #0052b3;
+    }
+
+    .comment form button:active {
+    background-color: #004799;
+    }
 </style>
-</style>
+
 
 {% endblock %}

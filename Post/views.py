@@ -40,10 +40,13 @@ class PostUpdateView(LoginRequiredMixin, generic.UpdateView):
 
 
 class PostDraftList(LoginRequiredMixin, generic.ListView):
-    queryset = Post.objects.filter(status=0).order_by('-create_on')
     context_object_name = "posts"
     template_name = "post/post_draft.html"
     paginate_by = 4
+
+    def get_queryset(self):
+        return Post.objects.filter(author=self.request.user, status=0).order_by('-create_on')
+
 
 class PostDeleteView(LoginRequiredMixin, generic.DeleteView):
     model = Post

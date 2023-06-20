@@ -1,0 +1,93 @@
+{% extends 'base.html' %}
+{% block content %}
+{% include 'account/alert.html' %}
+{% if post %}
+    <div class="container">
+        <h1>{{ post.title | linebreaks| safe }}</h1>
+        <h2>{{ post.content | linebreaks| safe}}</h2>
+
+    </div>
+    <hr>
+    {% if user.id == post.author_id %}
+
+        <a href="{% url 'post_edit' slug=post.slug %}">
+            <i class="fas fa-pencil-alt  edit-button">Edit</i>
+        </a>
+
+        <a href="{% url 'post_remove' slug=post.slug %}">
+            <i class="fas fa-trash-alt delete-button">Delete</i>
+        </a>
+    {% endif %}
+    <hr>
+    {% if user.is_authenticated %}
+        <a href="{% url 'like_post' slug=post.slug %}">Like<i class="fa fa-thumbs-up"></i>{{ post.like_count }} </a>
+    {% endif %}
+<!-- {% endif %}
+    <h1>No Post seen </h1> -->
+
+
+<div class="container" >
+    <div class="card-body" >
+        <!-- comments -->
+        <h2>{{ comments.count }} comments</h2>
+        {% if comments %}
+        {% for comment in comments %}
+        <div class="comments" style="padding: 10px;">
+            <p class="font-weight-bold">
+                {{ comment.name }}
+                <span class="text-muted font-weight-normal">
+                    {{ comment.created_on }}
+                </span>
+            </p>
+            Commented:{{ comment.body | linebreaks }}
+        </div>
+        {% endfor %}
+        {% else %}
+        <p>No Comment</p>
+        {% endif %}
+    </div>
+
+{% if user.is_authenticated %}
+<h3>Leave a comment</h3>
+<form method="post">
+    {% csrf_token %}
+    {{comment_form.as_p}}
+    <button type="submit" class=" btn btn-outline-success">Post Comment</button>
+</form>
+
+
+</div>
+    
+
+{% else %}
+<p>Pls login before you comment</p>
+<a class="btn btn-secondary" href="{% url 'signin' %}">Login</a>
+<p>If you don't have an account <a class="btn btn-primary" href="{% url 'register' %}">Register here&#8594; </a></p>
+
+{% endif %}
+
+
+
+
+<style>
+
+    h1{
+        text-align: center;
+    }
+    .edit-button {
+        position: left;    
+        bottom: 10px;
+        left: 10px;
+        transform: translateY(-50%);
+    }
+
+    .delete-button {
+        position: right;
+        bottom: 10px;
+        right: 10px;
+        transform: translateY(-50%);
+    }
+</style>
+</style>
+
+{% endblock %}

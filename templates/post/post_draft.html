@@ -1,0 +1,105 @@
+{% extends 'base.html' %}
+
+{% block content %}
+{% include 'account/alert.html' %}
+
+<section class="welcome">
+    <div class="welcome-message">
+        <h1>Welcome to Draft Posts</h1>
+    </div>
+    <hr>
+</section>
+
+<div class="container">
+    <div class="row">
+        <div class="col-12">
+            {% if posts %}
+            {% for post in page_obj %}
+            <div class="box">
+                <h2>{{ post.title }}</h2>
+                <p>{{ post.author }} | {{ post.create_on }}</p>
+                <P>{{ post.content|safe | slice:":200"}}</P>
+                {% if user.id == post.author_id %}
+                <a href="{% url 'post_detail' slug=post.slug %}" class="btn btn-primary">Read More&#8594;</a>
+                
+                <a class="btn btn-outline-success" href="{% url 'post_publish' slug=post.slug  %}">Publish</a>
+                        
+            </div>
+            <a href="{% url 'post_detail' slug=post.slug %}"><i class="fas fa-comment"></i> {{ post.comment_count }}</a>
+            <hr>
+            {% endif %}
+            {% endfor %}
+
+            
+
+            {% else %}
+            <h2>No Draft posts available</h2>
+            {% endif %}
+        </div>
+    </div>
+</div>
+<div class="pagination">
+    <span class="step-links">
+        {% if page_obj.has_previous %}
+        <a href="?page=1">&laquo; </a>
+        <a href="?page={{ page_obj.previous_page_number }}">Previous</a>
+        {% endif %}
+
+        <span class="current">
+            Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}
+        </span>
+
+        {% if page_obj.has_next %}
+        <a href="?page={{ page_obj.next_page_number }}">next</a>
+        <a href="?page={{ page_obj.paginator.num_pages }}"> &raquo;</a>
+        {% endif %}
+    </span>
+</div>
+<style>
+    .welcome-message {
+        text-align: center;
+        margin-top: 5%;
+        background-image: none;
+    }
+
+    .welcome-message h1 {
+
+        font-size: 48px;
+        margin-bottom: 20px;
+        position: relative;
+        animation: move-up 2s ease-in-out infinite alternate;
+    }
+
+    .welcome-message p {
+        font-size: 24px;
+        margin-bottom: 0;
+        animation: move-up 2s ease-in-out infinite alternate;
+    }
+
+    @keyframes move-up {
+        0% {
+            left: 0;
+        }
+
+        50% {
+            left: 200px;
+        }
+
+        100% {
+            left: 0;
+        }
+    }
+
+    @keyframes move-up {
+        from {
+            transform: translateY(0);
+        }
+
+        to {
+            transform: translateY(-10px);
+        }
+    }
+
+   
+</style>
+{% endblock %}

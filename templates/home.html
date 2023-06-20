@@ -1,0 +1,101 @@
+{% extends 'base.html' %}
+
+{% block content %}
+{% include 'account/alert.html' %}
+
+<section class="welcome">
+    <div class="welcome-message">
+        <h1>Welcome to Bloggie</h1>
+        <p>Check out for the latest posts below</p>
+    </div>
+    <hr>
+</section>
+
+<div class="container">
+    <div class="row">
+        <div class="col-12">
+            {% if posts %}
+                {% for post in posts %}
+                <div class="box">
+                    <h2>{{ post.title }}</h2>
+                    <p>{{ post.author }} | {{ post.create_on }}</p>
+                    <P>{{ post.content | slice:":200" | linebreaksbr| safe }}</P>
+                    <a href="{% url 'post_detail' slug=post.slug %}" class="btn btn-primary">Read More&#8594;</a>
+                </div>
+                <i class="fa fa-thumbs-up"></i>{{post.like_count}}
+                <i class="fas fa-comment"> </i>{{ post.comment_count }}
+                
+            
+                {% endfor %}
+
+            {% else %}
+            <h2>No posts available</h2>
+            {% endif %}
+        </div>
+    </div>
+</div>
+
+    <div class="pagination">
+        {% if page_obj.has_previous %}
+        <a class="page-link" href="?page={{ page_obj.previous_page_number }}">Previous</a>
+        {% endif %}
+        {% for num in page_obj.paginator.page_range %}
+        {% if page_obj.number == num %}
+        <a class="page-link active" href="?page={{ num }}">{{ num }}</a>
+        {% else %}
+        <a class="page-link" href="?page={{ num }}">{{ num }}</a>
+        {% endif %}
+        {% endfor %}
+        {% if page_obj.has_next %}
+        <a class="page-link" href="?page={{ page_obj.next_page_number }}">Next</a>
+        {% endif %}
+    </div>
+    
+        <style>
+            .welcome-message {
+                text-align: center;
+                margin-top: 5%;
+                background-image: none;
+            }
+             .welcome-message h1 {
+
+                    font-size: 48px;
+                    margin-bottom: 20px;
+                    position: relative;
+                    animation: move-up 2s ease-in-out infinite alternate;
+                }
+                
+                .welcome-message p {
+                    font-size: 24px;
+                    margin-bottom: 0;
+                    animation: move-up 2s ease-in-out infinite alternate;
+                }
+                @keyframes move-up {
+                    0% {
+                    left: 0;
+                    }
+                    50% {
+                    left: 200px;
+                    }
+                    100% {
+                    left: 0;
+                    }
+                }
+                
+                @keyframes move-up {
+                    from {
+                    transform: translateY(0);
+                    }
+                    to {
+                    transform: translateY(-10px);
+                    }
+                }
+        
+            div.row {
+                padding: 36px 24px 40px 24px;
+                box-shadow: 0 0 1px rgba(191, 219, 206, 0.15), 0 2px 3px 0 rgba(222, 240, 234, 0.1);
+                border-radius: 10px;
+            }
+           
+        </style>
+{% endblock %}

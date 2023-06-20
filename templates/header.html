@@ -1,0 +1,74 @@
+<header>
+<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="#">BLOGGIE</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor01"
+            aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarColor01">
+            <ul class="navbar-nav me-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'home' %}">Home
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'about'  %}">About</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="https://www.linkedin.com/in/fasasi-hafis-06a0a8272/"> <i class="fab fa-linkedin"></i> Linkedin</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="https://github.com/harhfeez/"> <i class="fab fa-github"></i> Github</a>
+                </li>
+            </ul>
+
+            <ul class="nav navbar-nav navbar-right">
+
+                {% if user.is_authenticated %}
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'post_create' %}">New Post</a>
+                </li>
+                
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'post_draft' %}">Drafts</a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'signout' %}">Log Out</a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link active">Welcome: {{user.username}}
+                     </a>
+                    
+                </li>
+                {% else %}
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'signin' %}"><i class="fas fa-user"></i></a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'register' %}">Register</a>
+                </li>
+                {% endif %}
+            </ul>
+            <form class="d-flex">
+                <input class="form-control me-sm-2" type="search" placeholder="Search">
+                <button class="btn btn-secondary my-2 my-sm-0" type="submit">Search</button>
+            </form>
+        </div>
+    </div>
+</nav>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+    $(document).ready(function () {
+        // Toggle the collapse navbar on mobile
+        $('.navbar-toggler').click(function () {
+            $('.navbar-collapse').toggleClass('show');
+        });
+    });
+</script>
+  
+</header> 
+

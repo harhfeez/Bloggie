@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+
+{% block content %}
+{% include 'account/alert.html' %}
+<div class="container" style="display: flex; flex-direction: column; align-items: center;">
+    <h1>Delete Post</h1>
+    <form method="POST">
+        {% csrf_token %}
+        <p>Are you sure you want to delete {{object}}?</p>
+        <button type="submit" class="btn btn-outline-danger">Delete</button>
+    </form>
+</div>
+
+{% endblock %}

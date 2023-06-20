@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+
+{% block content %}
+{% include 'account/alert.html' %}
+<div class="container" style="display: flex; flex-direction: column; align-items: center;">
+    <h3>Create Account</h3>
+    <div>
+
+        <form  method="POST">
+
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="SUBMIT" class="btn btn-outline-success">Register</button>
+        </form>
+    </div>
+</div>
+
+
+{% endblock %}

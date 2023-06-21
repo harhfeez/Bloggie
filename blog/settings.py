@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 """
 import os
 from pathlib import Path
+from dotenv import load_dotenv
 
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -19,14 +20,14 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.2/howto/deployment/checklist/
-
+load_dotenv()
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-pk5(!gjnl@po8yz)s-%s2l1l5f8j)%5o^f3gj$17hmpp209d4='
+SECRET_KEY = os.getenv('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = os.getenv('DEBUG')
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -38,12 +39,10 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'ckeditor',
     "account",
     'Post',
     'like',
     'Comment',
-    'django_summernote',
 ]
 
 MIDDLEWARE = [
@@ -83,11 +82,11 @@ WSGI_APPLICATION = 'blog.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'bloglocal', 
-        'USER': 'postgres',
-        'PASSWORD': '7984',
-        'HOST': '127.0.0.1', 
-        'PORT': '5432',
+        'NAME': str(os.getenv('DATABASE_NAME')), 
+        'USER': str(os.getenv('DATABASE_USER')),
+        'PASSWORD': str(os.getenv('DATABASE_PASSWORD')),
+        'HOST': str(os.getenv('DATABASE_HOST')), 
+        'PORT': int(os.getenv('DATABASE_PORT'))
     }
 }
 
@@ -141,7 +140,3 @@ STATICFILES_DIRS = [
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 LOGIN_REDIRECT_URL = '/'
-
-CRISPY_TEMPLATE_PACK = 'bootstrap4'
-
-CKEDITOR_BASEPATH = "/my_static/ckeditor/ckeditor/"

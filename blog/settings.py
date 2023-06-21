@@ -154,3 +154,4 @@ LOGIN_REDIRECT_URL = '/'
 CKEDITOR_BASEPATH = '/static/ckeditor/ckeditor/'
 CKEDITOR_UPLOAD_PATH = 'uploads/'
 
+AUTHENTICATION_BACKENDS = [    'django.contrib.auth.backends.ModelBackend',]

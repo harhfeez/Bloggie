@@ -3,6 +3,8 @@ from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm,AuthenticationForm
 from django.contrib.auth import get_user_model
 from Post.models import Post
+from ckeditor.widgets import CKEditorWidget
+
 
 User = get_user_model()
 
@@ -32,12 +34,10 @@ class SignInForm(forms.Form):
     password = forms.CharField(widget=forms.PasswordInput(), required=True)
 
 class PostForm(forms.ModelForm):
-    class Meta():
+    class Meta:
         model = Post
-        fields = ( 'title','content')
-
+        fields = ('title', 'content')
         widgets = {
-            'title':forms.TextInput(attrs={'class':'textinputclass'}),
-            'content':forms.Textarea(attrs={'class':'editable medium-editor-textarea postcontent' }),
-
+            'title': forms.TextInput(attrs={'class': 'textinputclass'}),
+            'content': CKEditorWidget(attrs={'class': 'cke_editable editable medium-editor-textarea postcontent'}),
         }

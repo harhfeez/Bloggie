@@ -1,0 +1,5 @@
+/* Example custom styles for CKEditor responsiveness */
+.cke_editable {
+    max-width: 100%;
+    width: 100%;
+}

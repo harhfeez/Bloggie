@@ -58,4 +58,4 @@ def post_publish(request, slug):
     post = get_object_or_404(Post, slug=slug)
     post.publish()
     messages.success(request, 'You have successfully publish the post ')
-    return redirect('post_detail', slug=slug)
+    return redirect('home')

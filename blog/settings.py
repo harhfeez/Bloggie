@@ -37,7 +37,7 @@ if not DEBUG:
 CSRF_TRUSTED_ORIGINS = ["https://bloggie-qsao.onrender.com"]
 
 
-ALLOWED_HOSTS = ["localhost",'127.0.0.1', "0.0.0.0",'bloggie-qsao.onrender.com']
+ALLOWED_HOSTS = ["localhost",'127.0.0.1', "0.0.0.0",'https://bloggie-qsao.onrender.com']
 
 
 # Application definition

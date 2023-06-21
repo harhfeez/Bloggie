@@ -33,6 +33,7 @@ class PostUpdateView(LoginRequiredMixin, generic.UpdateView):
     login_url ='/login/'
     redirect_field_name = 'post/post_detail.html'
     form_class = PostForm
+    template_name = "post/post_form.html"
    
 
     def get_success_url(self):
@@ -51,6 +52,8 @@ class PostDraftList(LoginRequiredMixin, generic.ListView):
 class PostDeleteView(LoginRequiredMixin, generic.DeleteView):
     model = Post
     success_url = reverse_lazy("home")
+    template_name = "post/post_confirm_delete.html"
+
 
 
 @login_required

@@ -3,8 +3,6 @@ from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm,AuthenticationForm
 from django.contrib.auth import get_user_model
 from Post.models import Post
-from ckeditor.widgets import CKEditorWidget
-
 
 User = get_user_model()
 
@@ -39,5 +37,5 @@ class PostForm(forms.ModelForm):
         fields = ('title', 'content')
         widgets = {
             'title': forms.TextInput(attrs={'class': 'textinputclass'}),
-            'content': CKEditorWidget(attrs={'class': 'cke_editable editable medium-editor-textarea postcontent'}),
+            'content': forms.Textarea(),
         }

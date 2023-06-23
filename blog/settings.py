@@ -53,7 +53,6 @@ INSTALLED_APPS = [
     'Post',
     'like',
     'Comment',
-    'ckeditor',
 ]
 
 MIDDLEWARE = [

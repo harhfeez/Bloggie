@@ -9,14 +9,17 @@
     </div>
     <hr>
     {% if user.id == post.author_id %}
-
-        <a href="{% url 'post_edit' slug=post.slug %}">
+    <div class="button-container">
+        <a class="btn btn-success" href="{% url 'post_edit' slug=post.slug %}">
             <i class="fas fa-pencil-alt  edit-button">Edit</i>
         </a>
-
-        <a href="{% url 'post_remove' slug=post.slug %}">
+                
+        <a class="btn btn-danger" href="{% url 'post_remove' slug=post.slug %}">
             <i class="fas fa-trash-alt delete-button">Delete</i>
         </a>
+    </div>
+
+
     {% endif %}
     <hr>
     {% if user.is_authenticated %}
@@ -75,26 +78,39 @@
 
     h1{
         text-align: center;
+        font-display: bold;
     }
-    .edit-button {
-        position: left;    
-        bottom: 10px;
-        left: 10px;
-        transform: translateY(-50%);
+    h2{
+        font-style:oblique;
     }
+.button-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: static;
+    bottom: 10px;
+    left: 10px;
+    right: 10px;
+    max-width: auto;
+    margin: 0 auto;
+}
 
-    .delete-button {
-        position: right;
-        bottom: 10px;
-        right: 10px;
-        transform: translateY(-50%);
-    }
+.edit-button {
+    padding: 10px 20px;
+    color: #fff;
+    text-decoration: none;
+}
 
+.delete-button {
+    padding: 10px 20px;
+    color: #fff;
+    text-decoration: none;
+}
     .comment form input[type="text"],
     .comment form textarea {
     padding: 10px;
     margin-bottom: 10px;
-    width: 25%;
+    width: flex;
     border: 1px solid #ccc;
     border-radius: 4px;
     font-size: 16px;

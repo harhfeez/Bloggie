@@ -6,7 +6,7 @@ from .models import Like
 
 class LikeAdmin(admin.ModelAdmin):
 
-    list_display = ("id",)
+    list_display = ("id","user","post")
 
 
 admin.site.register(Like, LikeAdmin)
